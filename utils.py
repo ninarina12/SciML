@@ -7,7 +7,7 @@ import torch
 
 from matplotlib import animation
 
-props = fm.FontProperties(family=['Lato', 'sans-serif'], size='large')
+props = fm.FontProperties(family=['sans-serif'], size='large')
 plt.rcParams['animation.writer'] = 'pillow'    
 plt.rcParams['animation.writer'] = 'pillow'
 plt.rcParams['mathtext.default'] = 'regular'
