@@ -243,9 +243,10 @@ def node_inference(ode, node, t, y0, device='cpu'):
     for i in range(3):
         format_axis(ax[i], props, xlabel='t', ybins=3)
 
-    for i in range(3,len(ax)):
+    for i in range(3,len(ax)-1):
         format_axis(ax[i], props, ybins=3, ylabel=r'$\rho$')
-
+    format_axis(ax[-1], props, ybins=3, ylabel=r'$\rho_{Pred.} - \rho_{True}$')
+    
     ax[0].set_ylabel('x')
     ax[1].set_yticklabels([])
     ax[2].set_yticklabels([])
@@ -281,7 +282,7 @@ def pinn_inference(ode, pinn, t, x, device='cpu'):
 
     y_diff = y_pred - y_true
     vmax = y_diff.abs().max()
-    sm.append(ax[2].imshow(y_diff.squeeze().cpu().T, aspect='auto', origin='lower', interpolation='nearest',
+    sm.append(ax[2].imshow(y_diff, aspect='auto', origin='lower', interpolation='nearest',
                            extent=extent, cmap=cmap_div, vmin=-vmax, vmax=vmax))
     ax[2].text(0.1, 0.9, 'Diff.', color='white', ha='left', va='top', transform=ax[2].transAxes)
 
@@ -291,9 +292,10 @@ def pinn_inference(ode, pinn, t, x, device='cpu'):
     for i in range(3):
         format_axis(ax[i], props, xlabel='t', ybins=3)
 
-    for i in range(3,len(ax)):
+    for i in range(3,len(ax)-1):
         format_axis(ax[i], props, ybins=3, ylabel=r'$\rho$')
-
+    format_axis(ax[-1], props, ybins=3, ylabel=r'$\rho_{Pred.} - \rho_{True}$')
+    
     ax[0].set_ylabel('x')
     ax[1].set_yticklabels([])
     ax[2].set_yticklabels([])
